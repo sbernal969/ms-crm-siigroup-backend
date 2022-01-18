@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "v1/login")
 public class LoginController {
     @Autowired(required = true) private LoginService loginService;
