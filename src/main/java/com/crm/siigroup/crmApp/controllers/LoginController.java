@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "v1/login")
 public class LoginController {
-    @Autowired(required = true) private LoginService loginService;
+
+    @Autowired(required = true)
+    private LoginService loginService;
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class.getSimpleName());
 

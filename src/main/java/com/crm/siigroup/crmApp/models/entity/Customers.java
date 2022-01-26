@@ -5,9 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
+@Table(name = "customer")
 @Entity
 public class Customers {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column
