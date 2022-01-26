@@ -1,5 +1,8 @@
 package com.crm.siigroup.crmApp.models.service;
 
+
+import com.crm.siigroup.crmApp.dto.in.CustomerIn;
+import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
 import com.crm.siigroup.crmApp.models.entity.Customers;
 import com.crm.siigroup.crmApp.repository.CustomerRepository;
@@ -45,4 +48,34 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerOutList;
     }
+
+    //Implementación del método postCustomer
+    @Override
+    public CustomerCreatedOut postCustomer(CustomerIn customerIn) {
+
+        CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
+        Customers customers = new Customers();
+
+        customers.setRut(customerIn.getRut());
+        customers.setFirstName(customerIn.getFirstName());
+        customers.setFamilyName(customerIn.getFamilyName());
+        customers.setBirth(customerIn.getBirth());
+        customers.setCountry(customerIn.getCountry());
+        customers.setNacionality(customerIn.getNacionality());
+        customers.setGender(customerIn.getGender());
+        customers.setEmail(customerIn.getEmail());
+        customers.setMobileNumber(customerIn.getMobileNumber());
+        customers.setFixNumber(customerIn.getFixNumber());
+        customers.setPostalAddress(customerIn.getPostalAddress());
+        customers.setIncome(customerIn.getIncome());
+        customers.setTipeOfClient(customerIn.getTipeOfClient());
+
+        customerRepository.save(customers);
+
+            customerCreatedOut.setCustomerCreated(true);
+            customerCreatedOut.setMessage("Usuario creado correctamente");
+
+        return customerCreatedOut;
+    }
+
 }

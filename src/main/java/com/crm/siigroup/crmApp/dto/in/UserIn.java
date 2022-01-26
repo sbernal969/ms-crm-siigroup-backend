@@ -8,6 +8,8 @@ public class UserIn {
 
     @JsonProperty
     private String user;
+
     @JsonProperty
     private String password;
+
 }
