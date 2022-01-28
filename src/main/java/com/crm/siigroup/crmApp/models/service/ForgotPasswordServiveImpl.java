@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ForgotPasswordServiveImpl implements ForgotPasswordServive{
+public class ForgotPasswordServiveImpl extends SendEmailService implements ForgotPasswordServive {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SendEmailService sendEmailService;
+
     private static final Logger logger = LoggerFactory.getLogger(ForgotPasswordController.class.getSimpleName());
 
     @Override
@@ -26,6 +30,7 @@ public class ForgotPasswordServiveImpl implements ForgotPasswordServive{
         if (usersDB == null || usersDB.equals("")  || !(forgotPasswordIn.getUser().equals(usersDB.getUsername()))){
             forgotPasswordOut.setMessage("Usuario no registrado");
         }else{
+            //sendEmailService.sendMail("franklin.conde@siigroup.cl", "Nueva clave", "Clave enviada");
             forgotPasswordOut.setEmail(usersDB.getEmail());
             forgotPasswordOut.setMessage("Correo enviado a " + usersDB.getEmail());
         }
