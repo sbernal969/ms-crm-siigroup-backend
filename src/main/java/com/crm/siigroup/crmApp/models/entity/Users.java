@@ -31,5 +31,8 @@ public class Users {
     private String password;
 
     @Column
+    private String email;
+
+    @Column
     private int typeRol;
 }
