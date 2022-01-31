@@ -9,9 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 @Service
 public class ForgotPasswordServiveImpl extends SendEmailService implements ForgotPasswordServive {
+
+    @Autowired
+    private PasswordGeneratorService passwordGeneratorService;
 
     @Autowired
     private UserRepository userRepository;
@@ -24,19 +28,35 @@ public class ForgotPasswordServiveImpl extends SendEmailService implements Forgo
     @Override
     public ForgotPasswordOut postForgotPassword(ForgotPasswordIn forgotPasswordIn) throws Exception {
 
-        Users usersDB = userRepository.findByUsername(forgotPasswordIn.getUser());
-        ForgotPasswordOut forgotPasswordOut = new ForgotPasswordOut();
+        try{
+            Users usersDB = userRepository.findByUsername(forgotPasswordIn.getUser());
+            ForgotPasswordOut forgotPasswordOut = new ForgotPasswordOut();
 
-        if (usersDB == null || usersDB.equals("")  || !(forgotPasswordIn.getUser().equals(usersDB.getUsername()))){
-            forgotPasswordOut.setMessage("Usuario no registrado");
-        }else{
-            //sendEmailService.sendMail("franklin.conde@siigroup.cl", "Nueva clave", "Clave enviada");
-            forgotPasswordOut.setEmail(usersDB.getEmail());
-            forgotPasswordOut.setMessage("Correo enviado a " + usersDB.getEmail());
+            if (usersDB == null || usersDB.equals("")  || !(forgotPasswordIn.getUser().equals(usersDB.getUsername()))){
+                forgotPasswordOut.setMessage("Usuario no registrado");
+                logger.info("Registro de usuario");
+            }else{
+                String newPassword = passwordGeneratorService.getPassword();
+                sendEmailService.sendMail(usersDB.getEmail(), "SOLICITUD DE NUENA CLAVE", "Estimado " + usersDB.getName() + " " + usersDB.getLastName() + " su nueva clave es: " + newPassword);
+                String passworMd5Encrip = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+
+                usersDB.setPassword(passworMd5Encrip);
+                userRepository.save(usersDB);
+
+                forgotPasswordOut.setEmail(usersDB.getEmail());
+                forgotPasswordOut.setMessage("Correo enviado a " + usersDB.getEmail());
+                logger.info("Envío de correo");
+            }
+
+            return forgotPasswordOut;
         }
-
-        return forgotPasswordOut;
-
+        catch (Exception ex){
+            ForgotPasswordOut forgotPasswordOut = new ForgotPasswordOut();
+            System.out.println(ex.getMessage());
+            logger.info("Error interno: " + ex.getMessage());
+            forgotPasswordOut.setEmail("");
+            forgotPasswordOut.setMessage("Error interno: " + ex.getMessage());
+            return forgotPasswordOut;
+        }
     }
-
 }
