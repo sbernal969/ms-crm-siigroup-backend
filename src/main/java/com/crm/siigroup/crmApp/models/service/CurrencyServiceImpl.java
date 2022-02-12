@@ -3,7 +3,6 @@ package com.crm.siigroup.crmApp.models.service;
 import com.crm.siigroup.crmApp.controllers.CurrencyController;
 import com.crm.siigroup.crmApp.dto.out.CurrencyOut;
 import com.crm.siigroup.crmApp.models.entity.Currency;
-import com.crm.siigroup.crmApp.models.entity.Customers;
 import com.crm.siigroup.crmApp.repository.CurrencyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
