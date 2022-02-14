@@ -3,9 +3,10 @@ package com.crm.siigroup.crmApp.dto.out;
 import lombok.Data;
 
 @Data
-public class CurrencyOut {
+public class CountryOut {
 
     private long id;
-    private String glosa;
+    private String name;
+    private String iso3;
 
 }
