@@ -8,6 +8,7 @@ import com.crm.siigroup.crmApp.models.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class CustomerController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("post")
+    @PostMapping("create")
     public ResponseEntity<Response<CustomerCreatedOut>> postCustomerController(@RequestBody() CustomerIn customerIn) throws Exception {
         logger.info("Ingresa a la creación de Customer");
         CustomerCreatedOut customerCreatedOut = customerService.postCustomer(customerIn);
