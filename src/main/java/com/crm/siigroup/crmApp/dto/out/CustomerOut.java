@@ -1,23 +1,59 @@
 package com.crm.siigroup.crmApp.dto.out;
 
+import com.crm.siigroup.crmApp.models.entity.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.boot.jackson.JsonComponent;
+
+import java.util.Date;
 
 @Data
 public class CustomerOut {
 
+    @JsonProperty
     private String rut;
-    private String firstName;
-    private String familyName;
-    private String birth;
-    private String country;
-    private String nacionality;
-    private String gender;
+    @JsonProperty
+    private String name;
+    @JsonProperty
+    private String familyFirstName;
+    @JsonProperty
+    private String familySecondName;
+    @JsonProperty
+    private Date birth;
+    @JsonProperty
+    private Country country;
+    @JsonProperty
+    private Nationality nacionality;
+    @JsonProperty
+    private Gender gender;
+    @JsonProperty
     private String email;
-    private String mobileNumber;
-    private String fixNumber;
-    private String postalAddress;
+    @JsonProperty
+    private Long mobileNumber;
+    @JsonProperty
+    private Country mobileNumberCode;
+    @JsonProperty
+    private Long fixNumber;
+    @JsonProperty
+    private Country fixNumberCode;
+    @JsonProperty
+    private Country addressCountry;
+    @JsonProperty
+    private String addressStreet;
+    @JsonProperty
+    private Long addressNumber;
+    @JsonProperty
+    private Communes addressComune;
+    @JsonProperty
+    private Long addressPostalCode;
+    @JsonProperty
+    private String addressCity;
+    @JsonProperty
+    private String addressAditional;
+    @JsonProperty
     private int income;
+    @JsonProperty
+    private Currency currency;
+    @JsonProperty
     private int tipeOfClient;
 
 }

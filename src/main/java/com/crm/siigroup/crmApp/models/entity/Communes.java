@@ -11,8 +11,7 @@ public class Communes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private Long communesId;
 
     @Column
     private String glosa;

@@ -32,7 +32,7 @@ public class GenderServiceImpl implements GenderService{
         try {
             for (Gender genderResponse : genderList) {
                 genderOut = new GenderOut();
-                genderOut.setId(genderResponse.getId());
+                genderOut.setId(genderResponse.getGenderId());
                 genderOut.setGlosa(genderResponse.getGlosa());
                 genderOutList.add(genderOut);
             }
