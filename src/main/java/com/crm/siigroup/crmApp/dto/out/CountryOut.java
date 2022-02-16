@@ -7,6 +7,6 @@ public class CountryOut {
 
     private long id;
     private String name;
-    private String iso3;
+    private String code;
 
 }

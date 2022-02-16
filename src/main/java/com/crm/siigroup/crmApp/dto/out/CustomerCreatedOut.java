@@ -7,5 +7,6 @@ public class CustomerCreatedOut {
 
     private Boolean customerCreated;
     private String message;
+    private Long idCustomer;
 
 }

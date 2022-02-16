@@ -11,9 +11,9 @@ public class Currency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private Long currencyId;
 
     @Column
     private String glosa;
 }
+

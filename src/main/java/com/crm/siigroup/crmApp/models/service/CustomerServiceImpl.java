@@ -4,7 +4,7 @@ package com.crm.siigroup.crmApp.models.service;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
-import com.crm.siigroup.crmApp.models.entity.Customers;
+import com.crm.siigroup.crmApp.models.entity.*;
 import com.crm.siigroup.crmApp.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,24 +24,32 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerOut customerOut = new CustomerOut();
         List<CustomerOut> customerOutList = new ArrayList<CustomerOut>();
-        List <Customers> customersList = new ArrayList<Customers>();
+        List <Customers>  customersList = customerRepository.findAll();
 
-        customersList = customerRepository.findAll();
-
-        for (Customers customers:customersList){
-            customerOut.setRut(customers.getRut());
-            customerOut.setFirstName(customers.getFirstName());
-            customerOut.setFamilyName(customers.getFamilyName());
-            customerOut.setBirth(customers.getBirth());
-            customerOut.setCountry(customers.getCountry());
-            customerOut.setNacionality(customers.getNacionality());
-            customerOut.setGender(customers.getGender());
-            customerOut.setEmail(customers.getEmail());
-            customerOut.setMobileNumber(customers.getMobileNumber());
-            customerOut.setFixNumber(customers.getFixNumber());
-            customerOut.setPostalAddress(customers.getPostalAddress());
-            customerOut.setIncome(customers.getIncome());
-            customerOut.setTipeOfClient(customers.getTipeOfClient());
+       for (Customers customers:customersList){
+           customerOut.setRut(customers.getRut());
+           customerOut.setName(customers.getName());
+           customerOut.setFamilyFirstName(customers.getFamilyFirstName());
+           customerOut.setFamilySecondName(customers.getFamilySecondName());
+           customerOut.setBirth(customers.getBirth());
+           customerOut.setCountry(customers.getCountry());
+           customerOut.setNacionality(customers.getNationality());
+           customerOut.setGender(customers.getGender());
+           customerOut.setEmail(customers.getEmail());
+           customerOut.setMobileNumber(customers.getMobileNumber());
+           customerOut.setMobileNumberCode(customers.getMobileNumberCode());
+           customerOut.setFixNumber(customers.getFixNumber());
+           customerOut.setFixNumberCode(customers.getFixNumberCode());
+           customerOut.setAddressCountry(customers.getAddressCountry());
+           customerOut.setAddressStreet(customers.getAddressStreet());
+           customerOut.setAddressNumber(customers.getAddressNumber());
+           customerOut.setAddressComune(customers.getAddressComune());
+           customerOut.setAddressPostalCode(customers.getAddressPostalCode());
+           customerOut.setAddressCity(customers.getAddressCity());
+           customerOut.setAddressAditional(customers.getAddressAditional());
+           customerOut.setIncome(customers.getIncome());
+           customerOut.setCurrency(customers.getCurrency());
+           customerOut.setTipeOfClient(customers.getTipeOfClient());
 
             customerOutList.add(customerOut);
         }
@@ -57,23 +65,34 @@ public class CustomerServiceImpl implements CustomerService {
         Customers customers = new Customers();
 
         customers.setRut(customerIn.getRut());
-        customers.setFirstName(customerIn.getFirstName());
-        customers.setFamilyName(customerIn.getFamilyName());
+        customers.setName(customerIn.getName());
+        customers.setFamilyFirstName(customerIn.getFamilyFirstName());
+        customers.setFamilySecondName(customerIn.getFamilySecondName());
         customers.setBirth(customerIn.getBirth());
         customers.setCountry(customerIn.getCountry());
-        customers.setNacionality(customerIn.getNacionality());
+        customers.setNationality(customerIn.getNationality());
         customers.setGender(customerIn.getGender());
         customers.setEmail(customerIn.getEmail());
         customers.setMobileNumber(customerIn.getMobileNumber());
+        customers.setMobileNumberCode(customerIn.getMobileNumberCode());
         customers.setFixNumber(customerIn.getFixNumber());
-        customers.setPostalAddress(customerIn.getPostalAddress());
+        customers.setFixNumberCode(customerIn.getFixNumberCode());
+        customers.setAddressCountry(customerIn.getAddressCountry());
+        customers.setAddressStreet(customerIn.getAddressStreet());
+        customers.setAddressNumber(customerIn.getAddressNumber());
+        customers.setAddressComune(customerIn.getAddressComune());
+        customers.setAddressPostalCode(customerIn.getAddressPostalCode());
+        customers.setAddressCity(customerIn.getAddressCity());
+        customers.setAddressAditional(customerIn.getAddressAditional());
         customers.setIncome(customerIn.getIncome());
+        customers.setCurrency(customerIn.getCurrency());
         customers.setTipeOfClient(customerIn.getTipeOfClient());
 
         customerRepository.save(customers);
 
             customerCreatedOut.setCustomerCreated(true);
             customerCreatedOut.setMessage("Usuario creado correctamente");
+            customerCreatedOut.setIdCustomer(customers.getId());
 
         return customerCreatedOut;
     }

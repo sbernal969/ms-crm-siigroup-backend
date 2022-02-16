@@ -32,7 +32,7 @@ public class CommunesServiceImpl implements CommunesService{
         try {
             for (Communes communesResponse : communesList) {
                 communesOut = new CommunesOut();
-                communesOut.setId(communesResponse.getId());
+                communesOut.setId(communesResponse.getCommunesId());
                 communesOut.setGlosa(communesResponse.getGlosa());
                 communesOutList.add(communesOut);
             }

@@ -3,54 +3,94 @@ package com.crm.siigroup.crmApp.models.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Table(name = "customer")
 @Entity
-public class Customers {
-    
+public class Customers implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "customer_id", nullable = false)
     private Long id;
 
     @Column
     private String rut;
 
     @Column
-    private String firstName;
+    private String name;
 
     @Column
-    private String familyName;
+    private String familyFirstName;
 
     @Column
-    private String birth;
+    private String familySecondName;
 
     @Column
-    private String country;
+    private Date birth;
 
-    @Column
-    private String nacionality;
+    @ManyToOne
+    @JoinColumn(name = "nationality_id")
+    private Nationality nationality;
 
-    @Column
-    private String gender;
+    @ManyToOne
+    @JoinColumn(name = "gender_id")
+    private Gender gender;
 
     @Column
     private String email;
 
     @Column
-    private String mobileNumber;
+    private Long mobileNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "mobileCode_id")
+    private Country mobileNumberCode;
 
     @Column
-    private String fixNumber;
+    private Long fixNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "fixCode_id")
+    private Country fixNumberCode;
+
+    @ManyToOne
+    @JoinColumn(name = "addressCountry_id")
+    private Country addressCountry;
 
     @Column
-    private String postalAddress;
+    private String addressStreet;
+
+    @Column
+    private Long addressNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "addressComune_id")
+    private Communes addressComune;
+
+    @Column
+    private Long addressPostalCode;
+
+    @Column
+    private String addressCity;
+
+    @Column
+    private String addressAditional;
 
     @Column
     private int income;
 
+    @ManyToOne
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
+
     @Column
     private int tipeOfClient;
+
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
 }

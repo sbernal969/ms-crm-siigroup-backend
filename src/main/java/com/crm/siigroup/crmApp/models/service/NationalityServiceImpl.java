@@ -1,6 +1,5 @@
 package com.crm.siigroup.crmApp.models.service;
 
-import com.crm.siigroup.crmApp.controllers.CurrencyController;
 import com.crm.siigroup.crmApp.controllers.NationalityController;
 import com.crm.siigroup.crmApp.dto.out.NationalityOut;
 import com.crm.siigroup.crmApp.models.entity.Nationality;
@@ -32,7 +31,7 @@ public class NationalityServiceImpl implements NationalityService {
             nationalityList = nationalityRepository.findAll();
             for (Nationality nationalityResponse : nationalityList) {
                 nationalityOut = new NationalityOut();
-                nationalityOut.setId(nationalityResponse.getId());
+                nationalityOut.setId(nationalityResponse.getNationalityId());
                 nationalityOut.setGlosa(nationalityResponse.getGlosa());
                 nationalityOutList.add(nationalityOut);
             }
