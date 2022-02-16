@@ -82,6 +82,10 @@ public class Customers implements Serializable {
     @Column
     private int income;
 
+    @ManyToOne
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
+
     @Column
     private int tipeOfClient;
 

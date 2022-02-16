@@ -33,7 +33,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 
             for (int i=0; i<currencyList.size(); i++){
                 currencyOut = new CurrencyOut();
-                currencyOut.setId(currencyList.get(i).getId());
+                currencyOut.setId(currencyList.get(i).getCurrencyId());
                 currencyOut.setGlosa(currencyList.get(i).getGlosa());
                 currencyOutlist.add(currencyOut);
             }

@@ -1,9 +1,6 @@
 package com.crm.siigroup.crmApp.dto.in;
 
-import com.crm.siigroup.crmApp.models.entity.Communes;
-import com.crm.siigroup.crmApp.models.entity.Country;
-import com.crm.siigroup.crmApp.models.entity.Gender;
-import com.crm.siigroup.crmApp.models.entity.Nationality;
+import com.crm.siigroup.crmApp.models.entity.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -74,6 +71,9 @@ public class CustomerIn {
 
     @JsonProperty
     private int income;
+
+    @JsonProperty
+    private Currency currency;
 
     @JsonProperty
     private int tipeOfClient;

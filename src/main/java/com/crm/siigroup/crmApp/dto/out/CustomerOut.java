@@ -1,9 +1,6 @@
 package com.crm.siigroup.crmApp.dto.out;
 
-import com.crm.siigroup.crmApp.models.entity.Communes;
-import com.crm.siigroup.crmApp.models.entity.Country;
-import com.crm.siigroup.crmApp.models.entity.Gender;
-import com.crm.siigroup.crmApp.models.entity.Nationality;
+import com.crm.siigroup.crmApp.models.entity.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -54,6 +51,8 @@ public class CustomerOut {
     private String addressAditional;
     @JsonProperty
     private int income;
+    @JsonProperty
+    private Currency currency;
     @JsonProperty
     private int tipeOfClient;
 
