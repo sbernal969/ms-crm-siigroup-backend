@@ -1,35 +1,80 @@
 package com.crm.siigroup.crmApp.dto.in;
 
+import com.crm.siigroup.crmApp.models.entity.Communes;
+import com.crm.siigroup.crmApp.models.entity.Country;
+import com.crm.siigroup.crmApp.models.entity.Gender;
+import com.crm.siigroup.crmApp.models.entity.Nationality;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class CustomerIn {
 
     @JsonProperty
     private String rut;
+
     @JsonProperty
-    private String firstName;
+    private String name;
+
     @JsonProperty
-    private String familyName;
+    private String familyFirstName;
+
     @JsonProperty
-    private String birth;
+    private String familySecondName;
+
     @JsonProperty
-    private String country;
+    private Date birth;
+
     @JsonProperty
-    private String nacionality;
+    private Country country;
+
     @JsonProperty
-    private String gender;
+    private Nationality nationality;
+
+    @JsonProperty
+    private Gender gender;
+
     @JsonProperty
     private String email;
+
     @JsonProperty
-    private String mobileNumber;
+    private Long mobileNumber;
+
     @JsonProperty
-    private String fixNumber;
+    private Country mobileNumberCode;
+
     @JsonProperty
-    private String postalAddress;
+    private Long fixNumber;
+
+    @JsonProperty
+    private Country fixNumberCode;
+
+    @JsonProperty
+    private Country addressCountry;
+
+    @JsonProperty
+    private String addressStreet;
+
+    @JsonProperty
+    private Long addressNumber;
+
+    @JsonProperty
+    private Communes addressComune;
+
+    @JsonProperty
+    private Long addressPostalCode;
+
+    @JsonProperty
+    private String addressCity;
+
+    @JsonProperty
+    private String addressAditional;
+
     @JsonProperty
     private int income;
+
     @JsonProperty
     private int tipeOfClient;
 }

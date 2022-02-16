@@ -31,9 +31,9 @@ public class CountryServiceImpl implements CountryService{
        try {
            for (Country countryResponse : countryList) {
                countryOut = new CountryOut();
-               countryOut.setId(countryResponse.getId());
+               countryOut.setId(countryResponse.getCountryId());
                countryOut.setName(countryResponse.getName());
-               countryOut.setIso3(countryResponse.getIso3());
+               countryOut.setCode(countryResponse.getCode());
                countryOutList.add(countryOut);
            }
        }catch (Exception ex){
