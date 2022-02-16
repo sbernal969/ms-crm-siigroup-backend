@@ -48,6 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
            customerOut.setAddressCity(customers.getAddressCity());
            customerOut.setAddressAditional(customers.getAddressAditional());
            customerOut.setIncome(customers.getIncome());
+           customerOut.setCurrency(customers.getCurrency());
            customerOut.setTipeOfClient(customers.getTipeOfClient());
 
             customerOutList.add(customerOut);
@@ -84,6 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
         customers.setAddressCity(customerIn.getAddressCity());
         customers.setAddressAditional(customerIn.getAddressAditional());
         customers.setIncome(customerIn.getIncome());
+        customers.setCurrency(customerIn.getCurrency());
         customers.setTipeOfClient(customerIn.getTipeOfClient());
 
         customerRepository.save(customers);
