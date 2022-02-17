@@ -29,7 +29,7 @@ public class Customers implements Serializable {
     private String familySecondName;
 
     @Column
-    private Date birth;
+    private String birth;
 
     @ManyToOne
     @JoinColumn(name = "nationality_id")

@@ -17,7 +17,7 @@ public class CustomerOut {
     @JsonProperty
     private String familySecondName;
     @JsonProperty
-    private Date birth;
+    private String birth;
 
     @JsonProperty
     private Long countryId;;

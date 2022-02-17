@@ -41,7 +41,7 @@ public class CustomerController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("seecustomer")
+    @GetMapping("getCustomerById")
     public ResponseEntity<Response<CustomerOut>> getViewCustomer(@RequestParam Long customerId) throws Exception {
         logger.info("getViewCustomers");
         CustomerOut customerOut = customerService.getViewCustomer(customerId);
