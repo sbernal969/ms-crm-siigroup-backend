@@ -1,6 +1,5 @@
 package com.crm.siigroup.crmApp.dto.out;
 
-import com.crm.siigroup.crmApp.models.entity.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -10,7 +9,7 @@ import java.util.Date;
 public class CustomerOut {
 
     @JsonProperty
-    private String rut;
+    private String personalId;
     @JsonProperty
     private String name;
     @JsonProperty
@@ -18,31 +17,66 @@ public class CustomerOut {
     @JsonProperty
     private String familySecondName;
     @JsonProperty
-    private Date birth;
+    private String birth;
+
     @JsonProperty
-    private Country country;
+    private Long countryId;;
     @JsonProperty
-    private Nationality nacionality;
+    private String countryName;
+
+
     @JsonProperty
-    private Gender gender;
+    private Long nationalityId;
+    @JsonProperty
+    private String nacionalityName;
+
+    @JsonProperty
+    private Long genderId;
+
+    @JsonProperty
+    private String genderType;
+
+
     @JsonProperty
     private String email;
+
+    @JsonProperty
+    private Long mobileNumberId;
     @JsonProperty
     private Long mobileNumber;
     @JsonProperty
-    private Country mobileNumberCode;
+    private String mobileNumberCode;
+
+    @JsonProperty
+    private Long fixNumberId;
     @JsonProperty
     private Long fixNumber;
     @JsonProperty
-    private Country fixNumberCode;
+    private String fixNumberCode;
+
+
+
     @JsonProperty
-    private Country addressCountry;
+    private Long addressCountryId;
+    @JsonProperty
+    private String addressCountryName;
+
+
+
     @JsonProperty
     private String addressStreet;
     @JsonProperty
     private Long addressNumber;
+
+
+    //@JsonProperty
+    //private Long addressComuneId;
     @JsonProperty
-    private Communes addressComune;
+    private String addressComune;
+
+
+
+
     @JsonProperty
     private Long addressPostalCode;
     @JsonProperty
@@ -51,8 +85,14 @@ public class CustomerOut {
     private String addressAditional;
     @JsonProperty
     private int income;
+
+
     @JsonProperty
-    private Currency currency;
+    private Long currencyId;
+    @JsonProperty
+    private String currencyName;
+
+
     @JsonProperty
     private int tipeOfClient;
 
