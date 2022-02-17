@@ -1,5 +1,6 @@
 package com.crm.siigroup.crmApp.controllers;
 
+import com.crm.siigroup.crmApp.dto.in.CustomerId;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
@@ -8,7 +9,6 @@ import com.crm.siigroup.crmApp.models.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +38,14 @@ public class CustomerController {
         logger.info("Ingresa a la creación de Customer");
         CustomerCreatedOut customerCreatedOut = customerService.postCustomer(customerIn);
         Response<CustomerCreatedOut> response = new Response<>(HttpStatus.CREATED.value(), "OK", customerCreatedOut);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("seecustomer")
+    public ResponseEntity<Response<CustomerOut>> getViewCustomer(@RequestParam Long customerId) throws Exception {
+        logger.info("getViewCustomers");
+        CustomerOut customerOut = customerService.getViewCustomer(customerId);
+        Response<CustomerOut> response = new Response<>(HttpStatus.CREATED.value(), "OK", customerOut);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
