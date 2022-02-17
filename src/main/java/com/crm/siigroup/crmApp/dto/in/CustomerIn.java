@@ -10,7 +10,7 @@ import java.util.Date;
 public class CustomerIn {
 
     @JsonProperty
-    private String rut;
+    private String personalId;
 
     @JsonProperty
     private String name;
@@ -22,16 +22,16 @@ public class CustomerIn {
     private String familySecondName;
 
     @JsonProperty
-    private Date birth;
+    private String birth;
 
     @JsonProperty
-    private Country country;
+    private Long country;
 
     @JsonProperty
-    private Nationality nationality;
+    private Long nationality;
 
     @JsonProperty
-    private Gender gender;
+    private Long gender;
 
     @JsonProperty
     private String email;
@@ -40,16 +40,16 @@ public class CustomerIn {
     private Long mobileNumber;
 
     @JsonProperty
-    private Country mobileNumberCode;
+    private Long mobileNumberCode;
 
     @JsonProperty
     private Long fixNumber;
 
     @JsonProperty
-    private Country fixNumberCode;
+    private Long fixNumberCode;
 
     @JsonProperty
-    private Country addressCountry;
+    private Long addressCountry;
 
     @JsonProperty
     private String addressStreet;
@@ -76,7 +76,7 @@ public class CustomerIn {
     private int income;
 
     @JsonProperty
-    private Currency currency;
+    private Long currency;
 
     @JsonProperty
     private int tipeOfClient;

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,38 +75,52 @@ public class CustomerServiceImpl implements CustomerService {
 
     //Implementación del método postCustomer
     @Override
-    public CustomerCreatedOut postCustomer(CustomerIn customerIn) {
+    public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
+
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
 
-        customers.setPersonalId(customerIn.getRut());
+        Country country = new Country();
+        Nationality nationality = new Nationality();
+        Gender gender = new Gender();
+        Country mobileNumberCode = new Country();
+        Country fixNumberCode = new Country();
+        Country addressCountry = new Country();
+        Currency currency = new Currency();
+
+
+        country.setCountryId(customerIn.getCountry());
+        nationality.setNationalityId(customerIn.getNationality());
+        gender.setGenderId(customerIn.getGender());
+        mobileNumberCode.setCountryId(customerIn.getMobileNumberCode());
+        fixNumberCode.setCountryId(customerIn.getMobileNumberCode());
+        addressCountry.setCountryId(customerIn.getAddressCountry());
+        currency.setCurrencyId(customerIn.getCurrency());
+
+
+        customers.setPersonalId(customerIn.getPersonalId());
         customers.setName(customerIn.getName());
         customers.setFamilyFirstName(customerIn.getFamilyFirstName());
         customers.setFamilySecondName(customerIn.getFamilySecondName());
         customers.setBirth(customerIn.getBirth());
-        customers.setCountry(customerIn.getCountry());
-
-        customers.setNationality(customerIn.getNationality());
-        customers.setGender(customerIn.getGender());
+        customers.setCountry(country);
+        customers.setNationality(nationality);
+        customers.setGender(gender);
         customers.setEmail(customerIn.getEmail());
         customers.setMobileNumber(customerIn.getMobileNumber());
-        customers.setMobileNumberCode(customerIn.getMobileNumberCode());
+        customers.setMobileNumberCode(mobileNumberCode);
         customers.setFixNumber(customerIn.getFixNumber());
-        customers.setFixNumberCode(customerIn.getFixNumberCode());
-        customers.setAddressCountry(customerIn.getAddressCountry());
+        customers.setFixNumberCode(fixNumberCode);
+        customers.setAddressCountry(addressCountry);
         customers.setAddressStreet(customerIn.getAddressStreet());
         customers.setAddressNumber(customerIn.getAddressNumber());
-
-
         customers.setAddressComune(customerIn.getAddressComune());
-
-
         customers.setAddressPostalCode(customerIn.getAddressPostalCode());
         customers.setAddressCity(customerIn.getAddressCity());
         customers.setAddressAditional(customerIn.getAddressAditional());
         customers.setIncome(customerIn.getIncome());
-        customers.setCurrency(customerIn.getCurrency());
+        customers.setCurrency(currency);
         customers.setTipeOfClient(customerIn.getTipeOfClient());
 
         customerRepository.save(customers);
