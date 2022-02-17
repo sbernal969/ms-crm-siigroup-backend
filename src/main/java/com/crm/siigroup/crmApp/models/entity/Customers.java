@@ -17,7 +17,7 @@ public class Customers implements Serializable {
     private Long id;
 
     @Column
-    private String rut;
+    private String personalId;
 
     @Column
     private String name;
@@ -29,7 +29,7 @@ public class Customers implements Serializable {
     private String familySecondName;
 
     @Column
-    private Date birth;
+    private String birth;
 
     @ManyToOne
     @JoinColumn(name = "nationality_id")
@@ -66,9 +66,12 @@ public class Customers implements Serializable {
     @Column
     private Long addressNumber;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "addressComune_id")
-    private Communes addressComune;
+    private Communes addressComune;*/
+
+    @Column
+    private String addressComune;
 
     @Column
     private Long addressPostalCode;
