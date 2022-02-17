@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
         List <Customers>  customersList = customerRepository.findAll();
 
        for (Customers customers:customersList){
-           customerOut.setPersonalId(customers.getRut());
+           customerOut.setPersonalId(customers.getPersonalId());
            customerOut.setName(customers.getName());
            customerOut.setFamilyFirstName(customers.getFamilyFirstName());
            customerOut.setFamilySecondName(customers.getFamilySecondName());
@@ -79,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
 
-        customers.setRut(customerIn.getRut());
+        customers.setPersonalId(customerIn.getRut());
         customers.setName(customerIn.getName());
         customers.setFamilyFirstName(customerIn.getFamilyFirstName());
         customers.setFamilySecondName(customerIn.getFamilySecondName());
@@ -125,7 +125,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         customers = customerRepository.findCustomersById(customerId);
 
-        customerOut.setPersonalId(customers.getRut());
+        customerOut.setPersonalId(customers.getPersonalId());
         customerOut.setName(customers.getName());
         customerOut.setFamilyFirstName(customers.getFamilyFirstName());
         customerOut.setFamilySecondName(customers.getFamilySecondName());

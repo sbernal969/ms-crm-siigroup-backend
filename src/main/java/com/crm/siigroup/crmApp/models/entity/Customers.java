@@ -17,7 +17,7 @@ public class Customers implements Serializable {
     private Long id;
 
     @Column
-    private String rut;
+    private String personalId;
 
     @Column
     private String name;
