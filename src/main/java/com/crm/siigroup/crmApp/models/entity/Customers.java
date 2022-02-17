@@ -66,9 +66,12 @@ public class Customers implements Serializable {
     @Column
     private Long addressNumber;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "addressComune_id")
-    private Communes addressComune;
+    private Communes addressComune;*/
+
+    @Column
+    private String addressComune;
 
     @Column
     private Long addressPostalCode;

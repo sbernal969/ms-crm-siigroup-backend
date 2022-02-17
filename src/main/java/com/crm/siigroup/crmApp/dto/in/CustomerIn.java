@@ -57,8 +57,11 @@ public class CustomerIn {
     @JsonProperty
     private Long addressNumber;
 
+   /*@JsonProperty
+    private Communes addressComune;*/
+
     @JsonProperty
-    private Communes addressComune;
+    private String addressComune;
 
     @JsonProperty
     private Long addressPostalCode;
