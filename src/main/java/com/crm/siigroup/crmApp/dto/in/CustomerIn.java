@@ -73,7 +73,7 @@ public class CustomerIn {
     private String addressAditional;
 
     @JsonProperty
-    private int income;
+    private Long income;
 
     @JsonProperty
     private Long currency;

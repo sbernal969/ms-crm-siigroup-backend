@@ -84,7 +84,7 @@ public class CustomerOut {
     @JsonProperty
     private String addressAditional;
     @JsonProperty
-    private int income;
+    private Long income;
 
 
     @JsonProperty
