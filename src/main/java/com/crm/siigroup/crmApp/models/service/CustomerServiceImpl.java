@@ -148,7 +148,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerOut.setCountryId(customers.getCountry().getCountryId());
         customerOut.setCountryName(customers.getCountry().getName());
         customerOut.setNationalityId(customers.getNationality().getNationalityId());
-        customerOut.setNacionalityName(customers.getName());
+        customerOut.setNacionalityName(customers.getNationality().getGlosa());
         customerOut.setGenderId(customers.getGender().getGenderId());
         customerOut.setGenderType(customers.getGender().getGlosa());
         customerOut.setEmail(customers.getEmail());
