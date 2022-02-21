@@ -1,6 +1,5 @@
 package com.crm.siigroup.crmApp.models.service;
 
-
 import com.crm.siigroup.crmApp.controllers.CustomerController;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
@@ -24,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class.getSimpleName());
 
+    //Visualizar customers.
     @Override
     public List<CustomerOut> getCustomer() throws Exception {
 
@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerOut> customerOutList = new ArrayList<CustomerOut>();
         List <Customers>  customersList = customerRepository.findAll();
 
-       for (Customers customers:customersList){
+       for (Customers customers : customersList){
            customerOut.setPersonalId(customers.getPersonalId());
            customerOut.setName(customers.getName());
            customerOut.setFamilyFirstName(customers.getFamilyFirstName());
@@ -54,11 +54,9 @@ public class CustomerServiceImpl implements CustomerService {
            customerOut.setAddressCountryName(customers.getAddressCountry().getName());
            customerOut.setAddressStreet(customers.getAddressStreet());
            customerOut.setAddressNumber(customers.getAddressNumber());
-
            //customerOut.setAddressComuneId(customers.getAddressComune().getCommunesId());
            //customerOut.setAddressComuneName(customers.getAddressComune().getGlosa());
            customerOut.setAddressComune(customers.getAddressComune());
-
            customerOut.setAddressPostalCode(customers.getAddressPostalCode());
            customerOut.setAddressCity(customers.getAddressCity());
            customerOut.setAddressAditional(customers.getAddressAditional());
@@ -69,14 +67,12 @@ public class CustomerServiceImpl implements CustomerService {
 
             customerOutList.add(customerOut);
         }
-
         return customerOutList;
     }
 
-    //Implementación del método postCustomer
+    //Implementación del método postCustomer customerCreate.
     @Override
     public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
-
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
@@ -129,6 +125,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             customerRepository.save(customers);
 
+
             customerCreatedOut.setCustomerCreated(true);
             customerCreatedOut.setMessage("Usuario creado correctamente");
             customerCreatedOut.setIdCustomer(customers.getId());
@@ -140,6 +137,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerCreatedOut;
     }
 
+    //Visualización de customers por id.
     @Override
     public CustomerOut getViewCustomer(Long customerId) throws Exception {
 
@@ -183,5 +181,4 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerOut;
     }
-
 }

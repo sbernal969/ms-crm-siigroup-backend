@@ -3,8 +3,6 @@ package com.crm.siigroup.crmApp.dto.out;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class CustomerOut {
 
@@ -24,7 +22,6 @@ public class CustomerOut {
     @JsonProperty
     private String countryName;
 
-
     @JsonProperty
     private Long nationalityId;
     @JsonProperty
@@ -32,10 +29,8 @@ public class CustomerOut {
 
     @JsonProperty
     private Long genderId;
-
     @JsonProperty
     private String genderType;
-
 
     @JsonProperty
     private String email;
@@ -54,28 +49,20 @@ public class CustomerOut {
     @JsonProperty
     private String fixNumberCode;
 
-
-
     @JsonProperty
     private Long addressCountryId;
     @JsonProperty
     private String addressCountryName;
-
-
 
     @JsonProperty
     private String addressStreet;
     @JsonProperty
     private Long addressNumber;
 
-
     //@JsonProperty
     //private Long addressComuneId;
     @JsonProperty
     private String addressComune;
-
-
-
 
     @JsonProperty
     private Long addressPostalCode;
@@ -83,15 +70,14 @@ public class CustomerOut {
     private String addressCity;
     @JsonProperty
     private String addressAditional;
+
     @JsonProperty
     private Long income;
-
 
     @JsonProperty
     private Long currencyId;
     @JsonProperty
     private String currencyName;
-
 
     @JsonProperty
     private int tipeOfClient;
