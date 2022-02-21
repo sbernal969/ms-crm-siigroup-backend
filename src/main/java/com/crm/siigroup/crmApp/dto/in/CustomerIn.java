@@ -1,10 +1,8 @@
 package com.crm.siigroup.crmApp.dto.in;
 
-import com.crm.siigroup.crmApp.models.entity.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Date;
 
 @Data
 public class CustomerIn {
