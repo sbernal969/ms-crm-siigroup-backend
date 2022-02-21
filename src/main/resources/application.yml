@@ -4,7 +4,7 @@ spring:
   datasource:
     initialization-mode: always
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-3-225-79-57.compute-1.amazonaws.com:5432/dtpgtfvk5f9vn?sslmode=require
-    username: nguhsuvfcatblh
-    password: 73703e517d13a5916b7363b0813ec7968cbc8318efb2fd22508a6f69d44a2cf0
+    url: jdbc:postgresql://ec2-3-221-109-227.compute-1.amazonaws.com:5432/d31mmdqh0krbg?sslmode=require
+    username: kihmohdqwadvcz
+    password: f3036633fb10e04de4b8a2c3dd0e755968813083f4c7e6e0ee1d0b7c2cea0207
     continueOnError: true
