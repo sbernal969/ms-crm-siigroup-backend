@@ -85,7 +85,7 @@ public class Customers implements Serializable {
     private String addressAditional;
 
     @Column
-    private int income;
+    private Long income;
 
     @ManyToOne
     @JoinColumn(name = "currency_id")
