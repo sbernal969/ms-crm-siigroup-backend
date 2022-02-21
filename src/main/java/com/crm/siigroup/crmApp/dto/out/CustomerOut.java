@@ -72,7 +72,7 @@ public class CustomerOut {
     private String addressAditional;
 
     @JsonProperty
-    private int income;
+    private Long income;
 
     @JsonProperty
     private Long currencyId;

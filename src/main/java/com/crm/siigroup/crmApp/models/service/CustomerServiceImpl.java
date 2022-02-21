@@ -76,6 +76,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
+        Customers validaCustomer = new Customers();
 
         Country country = new Country();
         Nationality nationality = new Nationality();
@@ -85,43 +86,54 @@ public class CustomerServiceImpl implements CustomerService {
         Country addressCountry = new Country();
         Currency currency = new Currency();
 
-        country.setCountryId(customerIn.getCountry());
-        nationality.setNationalityId(customerIn.getNationality());
-        gender.setGenderId(customerIn.getGender());
-        mobileNumberCode.setCountryId(customerIn.getMobileNumberCode());
-        fixNumberCode.setCountryId(customerIn.getMobileNumberCode());
-        addressCountry.setCountryId(customerIn.getAddressCountry());
-        currency.setCurrencyId(customerIn.getCurrency());
-        customers.setPersonalId(customerIn.getPersonalId());
-        customers.setName(customerIn.getName());
-        customers.setFamilyFirstName(customerIn.getFamilyFirstName());
-        customers.setFamilySecondName(customerIn.getFamilySecondName());
-        customers.setBirth(customerIn.getBirth());
-        customers.setCountry(country);
-        customers.setNationality(nationality);
-        customers.setGender(gender);
-        customers.setEmail(customerIn.getEmail());
-        customers.setMobileNumber(customerIn.getMobileNumber());
-        customers.setMobileNumberCode(mobileNumberCode);
-        customers.setFixNumber(customerIn.getFixNumber());
-        customers.setFixNumberCode(fixNumberCode);
-        customers.setAddressCountry(addressCountry);
-        customers.setAddressStreet(customerIn.getAddressStreet());
-        customers.setAddressNumber(customerIn.getAddressNumber());
-        customers.setAddressComune(customerIn.getAddressComune());
-        customers.setAddressPostalCode(customerIn.getAddressPostalCode());
-        customers.setAddressCity(customerIn.getAddressCity());
-        customers.setAddressAditional(customerIn.getAddressAditional());
-        customers.setIncome(customerIn.getIncome());
-        customers.setCurrency(currency);
-        customers.setTipeOfClient(customerIn.getTipeOfClient());
+        validaCustomer = customerRepository.findCustomersByPersonalId(customerIn.getPersonalId());
 
-        customerRepository.save(customers);
+        if (validaCustomer == null) {
+
+            country.setCountryId(customerIn.getCountry());
+            nationality.setNationalityId(customerIn.getNationality());
+            gender.setGenderId(customerIn.getGender());
+            mobileNumberCode.setCountryId(customerIn.getMobileNumberCode());
+            fixNumberCode.setCountryId(customerIn.getMobileNumberCode());
+            addressCountry.setCountryId(customerIn.getAddressCountry());
+            currency.setCurrencyId(customerIn.getCurrency());
+
+
+            customers.setPersonalId(customerIn.getPersonalId());
+            customers.setName(customerIn.getName());
+            customers.setFamilyFirstName(customerIn.getFamilyFirstName());
+            customers.setFamilySecondName(customerIn.getFamilySecondName());
+            customers.setBirth(customerIn.getBirth());
+            customers.setCountry(country);
+            customers.setNationality(nationality);
+            customers.setGender(gender);
+            customers.setEmail(customerIn.getEmail());
+            customers.setMobileNumber(customerIn.getMobileNumber());
+            customers.setMobileNumberCode(mobileNumberCode);
+            customers.setFixNumber(customerIn.getFixNumber());
+            customers.setFixNumberCode(fixNumberCode);
+            customers.setAddressCountry(addressCountry);
+            customers.setAddressStreet(customerIn.getAddressStreet());
+            customers.setAddressNumber(customerIn.getAddressNumber());
+            customers.setAddressComune(customerIn.getAddressComune());
+            customers.setAddressPostalCode(customerIn.getAddressPostalCode());
+            customers.setAddressCity(customerIn.getAddressCity());
+            customers.setAddressAditional(customerIn.getAddressAditional());
+            customers.setIncome(customerIn.getIncome());
+            customers.setCurrency(currency);
+            customers.setTipeOfClient(customerIn.getTipeOfClient());
+
+            customerRepository.save(customers);
+
 
             customerCreatedOut.setCustomerCreated(true);
             customerCreatedOut.setMessage("Usuario creado correctamente");
             customerCreatedOut.setIdCustomer(customers.getId());
-
+        }else{
+            customerCreatedOut.setCustomerCreated(false);
+            customerCreatedOut.setMessage("Usuario ya existe");
+            customerCreatedOut.setIdCustomer(validaCustomer.getId());
+        }
         return customerCreatedOut;
     }
 
