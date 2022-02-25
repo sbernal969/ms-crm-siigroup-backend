@@ -28,13 +28,14 @@ public class CustomerServiceImpl implements CustomerService {
     //Visualizar customers.
     @Override
     public List<CustomerOut> getCustomer() throws Exception {
-
+        logger.info("Ingresa a getCustomer impl");
         return convertListToCustomerOutList(customerRepository.findAll());
     }
 
     //Implementación del método postCustomer customerCreate.
     @Override
     public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
+        logger.info("Ingresa a postCustomer impl");
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
@@ -102,12 +103,13 @@ public class CustomerServiceImpl implements CustomerService {
     //Visualización de customers por id.
     @Override
     public CustomerOut getViewCustomer(Long customerId) throws Exception {
-
+        logger.info("Ingresa a getViewCustomer impl");
         return convertToCustomerOut(customerRepository.findCustomersById(customerId));
     }
 
     @Override
     public List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter) throws Exception {
+        logger.info("Ingresa a getCustomerByFilter impl");
 
         Currency currency = null;
         if(customerFilter.getIdCurrency()!=null){
@@ -139,6 +141,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     private List<CustomerOut> convertListToCustomerOutList(List<Customers> customersList){
+
+        logger.info("Ingresa a convertListToCustomerOutList impl");
+
+
         List<CustomerOut> customerOutList = new ArrayList<>();
 
         for (Customers customers : customersList) {
@@ -149,6 +155,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     private CustomerOut convertToCustomerOut(Customers customers){
+
+        logger.info("Ingresa a convertToCustomerOut impl");
+
 
         CustomerOut customerOut = new CustomerOut();
         customerOut.setIdCustomer(customers.getId());
