@@ -7,6 +7,8 @@ import lombok.Data;
 public class CustomerOut {
 
     @JsonProperty
+    private Long idCustomer;
+    @JsonProperty
     private String personalId;
     @JsonProperty
     private String name;

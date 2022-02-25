@@ -151,7 +151,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerOut convertToCustomerOut(Customers customers){
 
         CustomerOut customerOut = new CustomerOut();
-
+        customerOut.setIdCustomer(customers.getId());
         customerOut.setPersonalId(customers.getPersonalId());
         customerOut.setName(customers.getName());
         customerOut.setFamilyFirstName(customers.getFamilyFirstName());
