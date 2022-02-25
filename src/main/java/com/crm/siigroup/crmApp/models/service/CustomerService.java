@@ -1,5 +1,6 @@
 package com.crm.siigroup.crmApp.models.service;
 
+import com.crm.siigroup.crmApp.dto.in.CustomerFilter;
 import com.crm.siigroup.crmApp.dto.in.CustomerId;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
@@ -16,4 +17,6 @@ public interface CustomerService {
     CustomerCreatedOut postCustomer(CustomerIn customerIn) throws Exception;
 
     CustomerOut getViewCustomer(Long customerId) throws Exception;
+
+    List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter)throws Exception;
 }

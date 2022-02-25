@@ -1,5 +1,6 @@
 package com.crm.siigroup.crmApp.controllers;
 
+import com.crm.siigroup.crmApp.dto.in.CustomerFilter;
 import com.crm.siigroup.crmApp.dto.in.CustomerId;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
@@ -48,5 +49,13 @@ public class CustomerController {
         Response<CustomerOut> response = new Response<>(HttpStatus.CREATED.value(), "OK", customerOut);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    @PostMapping("search")
+    public ResponseEntity<Response<List<CustomerOut>>> postCustomerFilter(@RequestBody CustomerFilter filter) throws Exception {
+        logger.info("search");
+        List<CustomerOut> customerOutList = customerService.getCustomerByFilter(filter);
+        Response<List<CustomerOut>> response = new Response<>(HttpStatus.CREATED.value(), "OK", customerOutList);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
 
 }
