@@ -24,6 +24,7 @@ public class CommunesController {
 
     @Autowired(required = true)
     private CommunesService communesService;
+    
 
     private static final Logger logger = LoggerFactory.getLogger(CommunesController.class.getSimpleName());
 
