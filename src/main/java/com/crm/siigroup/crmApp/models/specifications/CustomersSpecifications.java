@@ -41,8 +41,6 @@ public final class CustomersSpecifications {
                 criteriaBuilder.equal(root.get("tipeOfClient"),tipeOfClient));
     }
 
-
-
     private static String contains(String expression) {
         return MessageFormat.format("{0}%", expression);
     }

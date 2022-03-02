@@ -18,5 +18,5 @@ public interface CustomerService {
 
     CustomerOut getViewCustomer(Long customerId) throws Exception;
 
-    List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter)throws Exception;
+    List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter) throws Exception;
 }

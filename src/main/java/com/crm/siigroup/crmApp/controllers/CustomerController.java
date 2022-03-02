@@ -1,7 +1,6 @@
 package com.crm.siigroup.crmApp.controllers;
 
 import com.crm.siigroup.crmApp.dto.in.CustomerFilter;
-import com.crm.siigroup.crmApp.dto.in.CustomerId;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
@@ -56,6 +55,4 @@ public class CustomerController {
         Response<List<CustomerOut>> response = new Response<>(HttpStatus.CREATED.value(), "OK", customerOutList);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-
 }
