@@ -123,7 +123,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Integer typeOfClient = 0;
         boolean bothClientTrue = customerFilter.isCustomer() && customerFilter.isProspect() ? true : false;
-        boolean bothClientFalse = customerFilter.isCustomer() && customerFilter.isProspect() ? false : true;
+        boolean bothClientFalse = !customerFilter.isCustomer() && !customerFilter.isProspect() ? true : false;
 
         if (bothClientTrue || bothClientFalse){
             typeOfClient = null;
