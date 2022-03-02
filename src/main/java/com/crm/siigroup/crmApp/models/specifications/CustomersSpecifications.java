@@ -5,6 +5,7 @@ import com.crm.siigroup.crmApp.models.entity.Customers;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 
 public final class CustomersSpecifications {
 
@@ -15,12 +16,15 @@ public final class CustomersSpecifications {
 
     public static Specification<Customers> nameContains(String name){
         return ((root, query, criteriaBuilder) ->
-                criteriaBuilder.like(root.get("name"),contains(name)));
+                criteriaBuilder.like(
+                        criteriaBuilder.upper(root.get("name")),contains(name.toUpperCase(Locale.ROOT))));
     }
 
     public static Specification<Customers> familyFirstNameContains(String familyFirstName){
         return ((root, query, criteriaBuilder) ->
-                criteriaBuilder.like(root.get("familyFirstName"),contains(familyFirstName)));
+                criteriaBuilder.like(
+                        criteriaBuilder.upper(root.get("familyFirstName")),
+                        contains(familyFirstName.toUpperCase(Locale.ROOT))));
     }
 
     public static Specification<Customers> incomeRange(Long min, Long max) {
@@ -40,8 +44,6 @@ public final class CustomersSpecifications {
         return ((root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("tipeOfClient"),tipeOfClient));
     }
-
-
 
     private static String contains(String expression) {
         return MessageFormat.format("{0}%", expression);
