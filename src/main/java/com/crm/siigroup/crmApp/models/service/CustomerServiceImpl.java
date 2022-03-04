@@ -5,7 +5,7 @@ import com.crm.siigroup.crmApp.dto.in.CustomerFilter;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
-import com.crm.siigroup.crmApp.models.converter.CustomerConverter;
+import com.crm.siigroup.crmApp.models.converter.CustomerOutConverter;
 import com.crm.siigroup.crmApp.models.entity.*;
 import com.crm.siigroup.crmApp.models.specifications.CustomersSpecifications;
 import com.crm.siigroup.crmApp.repository.CustomerRepository;
@@ -21,24 +21,27 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerConverter customerConverter;
+    private CustomerOutConverter customerOutConverter;
 
     @Autowired
     private CustomerRepository customerRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerController.class.getSimpleName());
 
-    //Visualizar customers.
+    //Visualizar todos los customers.
     @Override
+
     public List<CustomerOut> getCustomer() throws Exception {
+
         logger.info("Ingresa a getCustomer impl");
 
-        return customerConverter.fromEntity(customerRepository.findAll());
+        return customerOutConverter.fromEntity(customerRepository.findAll());
     }
 
-    //Implementación del método postCustomer customerCreate.
+    //Implementación del método postCustomer customerCreate (creación de cliente).
     @Override
     public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
+
         logger.info("Ingresa a postCustomer impl");
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
@@ -105,11 +108,13 @@ public class CustomerServiceImpl implements CustomerService {
     //Visualización de customers por id.
     @Override
     public CustomerOut getViewCustomer(Long customerId) throws Exception {
+
         logger.info("Ingresa a getViewCustomer impl");
 
-        return customerConverter.fromEntity(customerRepository.findCustomersById(customerId));
+        return customerOutConverter.fromEntity(customerRepository.findCustomersById(customerId));
     }
 
+    //Busqueda de clientes por filtros.
     @Override
     public List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter) throws Exception {
 
@@ -139,7 +144,6 @@ public class CustomerServiceImpl implements CustomerService {
                 .and(typeOfClient == null ? null : CustomersSpecifications.tipeOfClientContains(typeOfClient))
                 .and(currency == null ? null: CustomersSpecifications.currencyContains(currency));
 
-        return customerConverter.fromEntity(customerRepository.findAll(spec));
+        return customerOutConverter.fromEntity(customerRepository.findAll(spec));
     }
-
 }
