@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     //Visualizar todos los customers.
     @Override
-
     public List<CustomerOut> getCustomer() throws Exception {
 
         logger.info("Ingresa a getCustomer impl");
@@ -38,7 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
         return customerOutConverter.fromEntity(customerRepository.findAll());
     }
 
-    //Implementación del método postCustomer customerCreate (creación de cliente).
+    //Implementación del método postCustomer customerCreate (creación de clientes).
     @Override
     public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
 
@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerCreatedOut.setCustomerCreated(true);
             customerCreatedOut.setMessage("Usuario creado correctamente");
             customerCreatedOut.setIdCustomer(customers.getId());
-        }else{
+        } else {
             customerCreatedOut.setCustomerCreated(false);
             customerCreatedOut.setMessage("Usuario ya existe");
             customerCreatedOut.setIdCustomer(validaCustomer.getId());
@@ -121,7 +121,7 @@ public class CustomerServiceImpl implements CustomerService {
         logger.info("Ingresa a getCustomerByFilter impl");
 
         Currency currency = null;
-        if(customerFilter.getIdCurrency()!=null){
+        if (customerFilter.getIdCurrency() != null) {
             currency = new Currency();
             currency.setCurrencyId(customerFilter.getIdCurrency());
         }
@@ -130,9 +130,9 @@ public class CustomerServiceImpl implements CustomerService {
         boolean bothClientTrue = customerFilter.isCustomer() && customerFilter.isProspect() ? true : false;
         boolean bothClientFalse = !customerFilter.isCustomer() && !customerFilter.isProspect() ? true : false;
 
-        if (bothClientTrue || bothClientFalse){
+        if (bothClientTrue || bothClientFalse) {
             typeOfClient = null;
-        }else{
+        } else {
             typeOfClient = customerFilter.isCustomer() ? 1 : 0;
         }
 
@@ -140,9 +140,9 @@ public class CustomerServiceImpl implements CustomerService {
                 .where(customerFilter.getPersonalId() == null ? null : CustomersSpecifications.personalIdContains(customerFilter.getPersonalId()))
                 .and(customerFilter.getName() == null ? null : CustomersSpecifications.nameContains(customerFilter.getName()))
                 .and(customerFilter.getFamilyFirstName() == null ? null : CustomersSpecifications.familyFirstNameContains(customerFilter.getFamilyFirstName()))
-                .and(customerFilter.getIncomeMin() == null ? null : CustomersSpecifications.incomeRange(customerFilter.getIncomeMin(),customerFilter.getIncomeMax()))
+                .and(customerFilter.getIncomeMin() == null ? null : CustomersSpecifications.incomeRange(customerFilter.getIncomeMin(), customerFilter.getIncomeMax()))
                 .and(typeOfClient == null ? null : CustomersSpecifications.tipeOfClientContains(typeOfClient))
-                .and(currency == null ? null: CustomersSpecifications.currencyContains(currency));
+                .and(currency == null ? null : CustomersSpecifications.currencyContains(currency));
 
         return customerOutConverter.fromEntity(customerRepository.findAll(spec));
     }
