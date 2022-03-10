@@ -2,6 +2,7 @@ package com.crm.siigroup.crmApp.models.converter;
 
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
 import com.crm.siigroup.crmApp.models.entity.*;
+import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 //Convertidor de Entity -> Dto y viceversa de Dto -> Entity.

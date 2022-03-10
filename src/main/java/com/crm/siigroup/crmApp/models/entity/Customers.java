@@ -1,5 +1,6 @@
 package com.crm.siigroup.crmApp.models.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
