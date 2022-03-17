@@ -1,22 +1,27 @@
 package com.crm.siigroup.crmApp.models.service;
 
 import com.crm.siigroup.crmApp.controllers.CustomerController;
+import com.crm.siigroup.crmApp.dto.in.CustomerFilter;
 import com.crm.siigroup.crmApp.dto.in.CustomerIn;
 import com.crm.siigroup.crmApp.dto.out.CustomerCreatedOut;
 import com.crm.siigroup.crmApp.dto.out.CustomerOut;
+import com.crm.siigroup.crmApp.models.converter.CustomerConverter;
 import com.crm.siigroup.crmApp.models.entity.*;
+import com.crm.siigroup.crmApp.models.specifications.CustomersSpecifications;
 import com.crm.siigroup.crmApp.repository.CustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
+    @Autowired
+    private CustomerConverter customerConverter;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -26,53 +31,15 @@ public class CustomerServiceImpl implements CustomerService {
     //Visualizar customers.
     @Override
     public List<CustomerOut> getCustomer() throws Exception {
+        logger.info("Ingresa a getCustomer impl");
 
-        CustomerOut customerOut = new CustomerOut();
-        List<CustomerOut> customerOutList = new ArrayList<CustomerOut>();
-        List <Customers>  customersList = customerRepository.findAll();
-
-       for (Customers customers : customersList){
-           customerOut.setPersonalId(customers.getPersonalId());
-           customerOut.setName(customers.getName());
-           customerOut.setFamilyFirstName(customers.getFamilyFirstName());
-           customerOut.setFamilySecondName(customers.getFamilySecondName());
-           customerOut.setBirth(customers.getBirth());
-           customerOut.setCountryId(customers.getCountry().getCountryId());
-           customerOut.setCountryName(customers.getCountry().getName());
-           customerOut.setNationalityId(customers.getNationality().getNationalityId());
-           customerOut.setNacionalityName(customers.getNationality().getGlosa());
-           customerOut.setGenderId(customers.getGender().getGenderId());
-           customerOut.setGenderType(customers.getGender().getGlosa());
-           customerOut.setEmail(customers.getEmail());
-           customerOut.setMobileNumberId(customers.getMobileNumberCode().getCountryId());
-           customerOut.setMobileNumber(customers.getMobileNumber());
-           customerOut.setMobileNumberCode(customers.getMobileNumberCode().getCode());
-           customerOut.setFixNumberId(customers.getFixNumberCode().getCountryId());
-           customerOut.setFixNumber(customers.getFixNumber());
-           customerOut.setFixNumberCode(customers.getFixNumberCode().getCode());
-           customerOut.setAddressCountryId(customers.getAddressCountry().getCountryId());
-           customerOut.setAddressCountryName(customers.getAddressCountry().getName());
-           customerOut.setAddressStreet(customers.getAddressStreet());
-           customerOut.setAddressNumber(customers.getAddressNumber());
-           //customerOut.setAddressComuneId(customers.getAddressComune().getCommunesId());
-           //customerOut.setAddressComuneName(customers.getAddressComune().getGlosa());
-           customerOut.setAddressComune(customers.getAddressComune());
-           customerOut.setAddressPostalCode(customers.getAddressPostalCode());
-           customerOut.setAddressCity(customers.getAddressCity());
-           customerOut.setAddressAditional(customers.getAddressAditional());
-           customerOut.setIncome(customers.getIncome());
-           customerOut.setCurrencyId(customers.getCurrency().getCurrencyId());
-           customerOut.setCurrencyName(customers.getCurrency().getGlosa());
-           customerOut.setTipeOfClient(customers.getTipeOfClient());
-
-            customerOutList.add(customerOut);
-        }
-        return customerOutList;
+        return customerConverter.fromEntity(customerRepository.findAll());
     }
 
     //Implementación del método postCustomer customerCreate.
     @Override
     public CustomerCreatedOut postCustomer(CustomerIn customerIn) throws ParseException {
+        logger.info("Ingresa a postCustomer impl");
 
         CustomerCreatedOut customerCreatedOut = new CustomerCreatedOut();
         Customers customers = new Customers();
@@ -97,7 +64,6 @@ public class CustomerServiceImpl implements CustomerService {
             fixNumberCode.setCountryId(customerIn.getMobileNumberCode());
             addressCountry.setCountryId(customerIn.getAddressCountry());
             currency.setCurrencyId(customerIn.getCurrency());
-
 
             customers.setPersonalId(customerIn.getPersonalId());
             customers.setName(customerIn.getName());
@@ -125,7 +91,6 @@ public class CustomerServiceImpl implements CustomerService {
 
             customerRepository.save(customers);
 
-
             customerCreatedOut.setCustomerCreated(true);
             customerCreatedOut.setMessage("Usuario creado correctamente");
             customerCreatedOut.setIdCustomer(customers.getId());
@@ -140,45 +105,41 @@ public class CustomerServiceImpl implements CustomerService {
     //Visualización de customers por id.
     @Override
     public CustomerOut getViewCustomer(Long customerId) throws Exception {
+        logger.info("Ingresa a getViewCustomer impl");
 
-        CustomerOut customerOut = new CustomerOut();
-        Customers customers = new Customers();
-
-        customers = customerRepository.findCustomersById(customerId);
-
-        customerOut.setPersonalId(customers.getPersonalId());
-        customerOut.setName(customers.getName());
-        customerOut.setFamilyFirstName(customers.getFamilyFirstName());
-        customerOut.setFamilySecondName(customers.getFamilySecondName());
-        customerOut.setBirth(customers.getBirth());
-        customerOut.setCountryId(customers.getCountry().getCountryId());
-        customerOut.setCountryName(customers.getCountry().getName());
-        customerOut.setNationalityId(customers.getNationality().getNationalityId());
-        customerOut.setNacionalityName(customers.getNationality().getGlosa());
-        customerOut.setGenderId(customers.getGender().getGenderId());
-        customerOut.setGenderType(customers.getGender().getGlosa());
-        customerOut.setEmail(customers.getEmail());
-        customerOut.setMobileNumberId(customers.getMobileNumberCode().getCountryId());
-        customerOut.setMobileNumber(customers.getMobileNumber());
-        customerOut.setMobileNumberCode(customers.getMobileNumberCode().getCode());
-        customerOut.setFixNumberId(customers.getFixNumberCode().getCountryId());
-        customerOut.setFixNumber(customers.getFixNumber());
-        customerOut.setFixNumberCode(customers.getFixNumberCode().getCode());
-        customerOut.setAddressCountryId(customers.getAddressCountry().getCountryId());
-        customerOut.setAddressCountryName(customers.getAddressCountry().getName());
-        customerOut.setAddressStreet(customers.getAddressStreet());
-        customerOut.setAddressNumber(customers.getAddressNumber());
-        //customerOut.setAddressComuneId(customers.getAddressComune().getCommunesId());
-        //customerOut.setAddressComuneName(customers.getAddressComune().getGlosa());
-        customerOut.setAddressComune(customers.getAddressComune());
-        customerOut.setAddressPostalCode(customers.getAddressPostalCode());
-        customerOut.setAddressCity(customers.getAddressCity());
-        customerOut.setAddressAditional(customers.getAddressAditional());
-        customerOut.setIncome(customers.getIncome());
-        customerOut.setCurrencyId(customers.getCurrency().getCurrencyId());
-        customerOut.setCurrencyName(customers.getCurrency().getGlosa());
-        customerOut.setTipeOfClient(customers.getTipeOfClient());
-
-        return customerOut;
+        return customerConverter.fromEntity(customerRepository.findCustomersById(customerId));
     }
+
+    @Override
+    public List<CustomerOut> getCustomerByFilter(CustomerFilter customerFilter) throws Exception {
+
+        logger.info("Ingresa a getCustomerByFilter impl");
+
+        Currency currency = null;
+        if(customerFilter.getIdCurrency()!=null){
+            currency = new Currency();
+            currency.setCurrencyId(customerFilter.getIdCurrency());
+        }
+
+        Integer typeOfClient = 0;
+        boolean bothClientTrue = customerFilter.isCustomer() && customerFilter.isProspect() ? true : false;
+        boolean bothClientFalse = !customerFilter.isCustomer() && !customerFilter.isProspect() ? true : false;
+
+        if (bothClientTrue || bothClientFalse){
+            typeOfClient = null;
+        }else{
+            typeOfClient = customerFilter.isCustomer() ? 1 : 0;
+        }
+
+        Specification<Customers> spec = Specification
+                .where(customerFilter.getPersonalId() == null ? null : CustomersSpecifications.personalIdContains(customerFilter.getPersonalId()))
+                .and(customerFilter.getName() == null ? null : CustomersSpecifications.nameContains(customerFilter.getName()))
+                .and(customerFilter.getFamilyFirstName() == null ? null : CustomersSpecifications.familyFirstNameContains(customerFilter.getFamilyFirstName()))
+                .and(customerFilter.getIncomeMin() == null ? null : CustomersSpecifications.incomeRange(customerFilter.getIncomeMin(),customerFilter.getIncomeMax()))
+                .and(typeOfClient == null ? null : CustomersSpecifications.tipeOfClientContains(typeOfClient))
+                .and(currency == null ? null: CustomersSpecifications.currencyContains(currency));
+
+        return customerConverter.fromEntity(customerRepository.findAll(spec));
+    }
+
 }
